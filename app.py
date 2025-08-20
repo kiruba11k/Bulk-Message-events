@@ -137,7 +137,7 @@ uploaded_file = st.file_uploader("Upload CSV file with LinkedIn data", type=["cs
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
 
-    required_cols = ["prospect_name", "prospect_background"]
+    required_cols = ["Name", "LinkedinData"]
     if not all(col in df.columns for col in required_cols):
         st.error(f"CSV must contain columns: {', '.join(required_cols)}")
     else:
