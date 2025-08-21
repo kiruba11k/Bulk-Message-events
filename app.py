@@ -86,19 +86,102 @@ def generate_message(state: ProspectMessageState) -> ProspectMessageState:
     clean_background = re.sub(r'\s{2,}', ' ', clean_background).strip()
 
     prompt = f"""
-IMPORTANT: Output ONLY the message itself.
+IMPORTANT: Output ONLY the message itself. 
 Do NOT include any explanations, labels, or introductions.
 Create a SHORT LinkedIn connection message (MAX 3 LINES , 250 chars) following this natural pattern:
 
-Hi {prospect_first_name},
-I see that you'll be attending {state.get('event_name', '')}. Highlight ONE specific achievement/expertise from their background without mentioning companies or job titles.
-Close with "Best, {my_name}"
+1. "Hi {prospect_first_name},"
+2. Mention event participation: "I see that you will be attending {state.get('event_name', '')}"
+3. Highlight one specific achievement/expertise from their background WITHOUT mentioning companies or job titles
+4. Avoid these flattery words: exploring, interested, learning, No easy feat, Impressive, Noteworthy, Remarkable, Fascinating, Admiring, Inspiring, No small feat, No easy task, Stood out
+5. Express your attendance and desire to connect
+6. Close with "Best, {my_name}"
 
+Examples:
+
+Hi Tamara,
+I see that you'll be attending Step San Francisco  2025. Your leadership in driving agentic AI and multi-agent systems caught my attention. 
+I'll be there too & looking forward to catching up at the event!
+Best,
+{my_name}
+
+Hi David,
+I see that you'll be attending Step San Francisco  2025. Your work on analytics around content protection caught my attention.
+I'll be there too & looking forward to catching up at the event.
+Best,
+{my_name}
+
+Hi Arthy,
+I see you’ll be attending Step San Francisco  2025. Your leadership in driving business transformation, especially in AI adoption and literacy, really caught my attention. I’ll be there too and would love to connect at the event!
+Best,
+{my_name}
+
+Hi Harveer,
+I see that you’ll be attending  Step San Francisco  2025. Your leadership in scaling enterprise AI and driving data-led digital transformation in banking and telecom really caught my attention. I’ll be there too & looking forward to catching up with you at the event.
+Best,
+{my_name}
+
+Hi Prem,
+I see that you’ll be attending Step San Francisco  2025. Your leadership in data governance and complex data migrations, especially in the banking and finance sectors, is quite interesting.
+I’ll be there too & looking forward to catching up with you at the event.
+Best,
+{my_name}
+
+Hi Evan,
+I see that you’ll be attending Step San Francisco  2025. Your role in leading generative AI products and bridging commercial-medical needs with AZBrain is a great example of product-led data science.
+I’ll be there too & looking forward to catching up at the event.
+Best,
+{my_name}
+
+Hi David,
+I see that you’ll be attending Step San Francisco  2025.. Your work leading analytics around content protection and distribution at NBCU, with deep econometric and ML rigor, caught my attention.
+I’ll be there too & looking forward to catching up with you at the event.
+Best,
+{my_name}
+
+Hi Amrita,
+I see that you’ll be attending Step San Francisco  2025. Your work on AI-powered payment analytics and client enablement at BNY, especially your focus on insights and commercialization, stood out to me.
+I’ll be there too & looking forward to catching up with you at the event.
+Best,
+{my_name}
+
+Hi Sandra,
+I see that you’ll be attending Step San Francisco  2025. Your leadership in scaling digital health platforms and AI strategy across clinical-grade solutions and connected care really stood out.
+I’ll be there too & looking forward to catching up with you at the event.
+Best,
+{my_name}
+
+Hi Sharna,
+I see that you’ll be attending Step San Francisco  2025.. Your work scaling GenAI solutions and leading AI CoEs with a strong focus on Responsible AI aligns closely with where enterprise AI is headed.
+I’ll be there too & looking forward to catching up with you at the event.
+Best,
+{my_name}
+
+Hi Ali,
+I see that you’ll be attending Step San Francisco  2025.. Your transition into leading AI partnerships and building transformation programs grounded in culture and impact-driven adoption is genuinely exciting.
+I’ll be there too & looking forward to catching up with you at the event.
+Best,
+{my_name}
+
+
+Hi Ramya,
+I see that you’ll be attending Step San Francisco  2025. Your leadership in AI automation for valuation and advisory especially your focus on building from scratch and challenging norms signals bold thinking.
+I’ll be there too & looking forward to catching up with you at the event.
+Best,
+{my_name}
+
+Hi Kate,
+I see that you’ll be attending Step San Francisco  2025. Your shift from claims to IT leadership, along with your deep background in change and project management, reflects a unique blend of ops and tech insight.
+I’ll be there too & looking forward to catching up with you at the event.
+Best,
+{my_name}
+
+Now create for:
 Prospect: {state['prospect_name']}
 Key Highlight: {clean_background}
 Event: {state.get('event_name', '')}
 
-Message:
+Message (MAX 2-3 LINES within 250 chars):
 Hi {prospect_first_name},"""
 
     try:
