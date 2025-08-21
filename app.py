@@ -232,6 +232,7 @@ if uploaded_file is not None:
     else:
         st.success("CSV uploaded successfully!")
         if st.button("Generate Messages for All Prospects"):
+            start_time = time.time()
             with st.spinner("Generating messages for all prospects..."):
                 messages = []
                 for idx, row in df.iterrows():
@@ -255,7 +256,9 @@ if uploaded_file is not None:
                 df.to_csv(output, index=False)
                 output.seek(0)
 
-                st.success("Messages generated successfully!")
+                end_time = time.time() 
+                elapsed_time = end_time - start_time
+                st.success(f"Messages generated successfully in {elapsed_time:.2f} seconds!")
                 st.download_button(
                     label="Download Updated CSV",
                     data=output,
