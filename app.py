@@ -6,6 +6,8 @@ from groq import Groq
 from langgraph.graph import StateGraph, END
 import re
 from io import BytesIO
+import chardet
+
 
 # ==========================
 # CONFIGURATION & CLIENT
@@ -135,7 +137,11 @@ st.title("Bulk LinkedIn Message Generator")
 uploaded_file = st.file_uploader("Upload CSV file with LinkedIn data", type=["csv"])
 
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
+    rawdata = uploaded_file.read()
+    result = chardet.detect(rawdata)
+    encoding = result['encoding']
+    uploaded_file.seek(0)  # Reset file pointer after reading
+    df = pd.read_csv(uploaded_file, encoding=encoding)
 
     required_cols = ["Name", "LinkedinData"]
     if not all(col in df.columns for col in required_cols):
