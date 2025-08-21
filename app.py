@@ -7,7 +7,7 @@ from langgraph.graph import StateGraph, END
 import re
 from io import BytesIO
 import chardet
-
+import time
 
 # ==========================
 # CONFIGURATION & CLIENT
