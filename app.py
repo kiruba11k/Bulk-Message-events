@@ -153,11 +153,11 @@ if uploaded_file is not None:
                 messages = []
                 for idx, row in df.iterrows():
                     state = {
-                        "prospect_name": row["prospect_name"],
+                        "prospect_name": row["Name"],
                         "designation": row.get("designation", ""),
                         "company": row.get("company", ""),
                         "industry": row.get("industry", ""),
-                        "prospect_background": row["prospect_background"],
+                        "prospect_background": row["LinkedinData"],
                         "my_background": "",
                         "event_name": "Step San Francisco 2025",
                         "event_details": "August 12-14, MGM Grand Las Vegas"
